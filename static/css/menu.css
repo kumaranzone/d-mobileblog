@@ -1,0 +1,35 @@
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+    border:solid 1px;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+    .sidebar-nav .navbar li a span {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-left: 15px;
+    color:black;
+  }
+  .sidebar-nav .navbar li a:hover {
+     background-color: grey;
+    color: white;
+  }
+
+  .sidebar-nav  #menu_wrapper .activec {
+    background-color: #428bca;
+    color: white;
+  }
+}

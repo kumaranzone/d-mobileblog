@@ -1,0 +1,162 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Home - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+     <!-- <link type="text/css" rel="stylesheet" href="{% static "css/bjqs.css"  %}"/> -->
+
+      <link type="text/css" rel="stylesheet" href="{% static "css/lightslider.min.css"  %}"/>
+
+      <link type="text/css" rel="stylesheet" href="{% static "css/menu.css"  %}"/>
+
+    <!-- Custom CSS -->
+     <link href="{% static "css/blog.css" %}" rel="stylesheet">
+
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+   
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!-- jQuery -->
+    <!-- Bootstrap core JavaScript
+    ================================================== --> 
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+<!--     // <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+     <!-- // <script src="{% static "js/bjqs-1.3.min.js" %}"></script> -->
+      <script src="{% static "js/lightslider.min.js" %}"></script>
+          <script>
+        jQuery(document).ready(function($) {
+          
+
+         $("ul.navbar-nav>li").on("click", "a", function (event) {
+            $("#menu_wrapper .activec").removeClass("activec");
+            $(this).addClass("activec");
+        });
+        $("#lightSlider").lightSlider({
+                item: 2,
+                pager: true,
+                gallery: false,
+               // galleryMargin: 5,
+                //thumbMargin: 5,
+               // currentPagerPosition: 'top',
+                controls: true,
+                // prevHtml: 'Prev',
+                // nextHtml: 'Next',
+                mode: "slide",
+
+            }); 
+        
+        });
+    </script>
+    
+    <script src="{% static "js/docs.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.js"></script>
+</head>
+
+<body>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+        <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-3">
+            
+                     <div class="sidebar-nav">
+                          <div class="navbar navbar-default" role="navigation">
+                            <div class="navbar-header">
+                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                              </button>
+                              <span class="visible-xs navbar-brand">Navigation</span>
+                            </div>
+                            <div id="menu_wrapper" class="navbar-collapse collapse sidebar-navbar-collapse">
+                              <ul class="nav navbar-nav">
+                                <li class="activec"><a href="{% url "index" %}"><img src="{{ STATIC_URL }}img/home.png" alt="HOME"/><span class="menutitle">HOME</span></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}img/archive.png" alt=""/><span class="menutitle">ARCHIVE</span></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}img/aboutus.png" alt=""/><span class="menutitle">ABOUT US</span></a></li>
+                              
+                              </ul>
+                            </div><!--/.nav-collapse -->
+                          </div>
+                    </div>
+
+         
+                </div>
+
+                    <div class="col-md-8">
+                        
+                          <!-- Blog Entries Column -->
+            
+                        {% block blog_entries %} {% endblock %}
+
+
+                    </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- /.whats next widget row -->
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div  class="col-md-8">
+            <hr>
+             <!-- <div class="col-md-8" id="my-slideshow"> -->
+             <h3>What to read next</h3>
+             <hr>
+             <ul id="lightSlider">
+             <!-- <ul class="bjqs"> -->
+                 {% for object in object_list %}
+                 {% if forloop.counter0 >= 3 %}
+                 <li>                   
+                        <a href="{% url "entry_detail" slug=object.slug %}" >
+                            <img src="{{ MEDIA_URL }}{{ object.thumbnail }}"  class="media-object img-rounded" alt="125x125">
+                            {{object.title}}
+                        </a>
+                   
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+             </div>                     
+        </div>
+        <!-- /. end of whats next widget row -->
+
+          
+        
+         
+           
+
+    </div>
+    <!-- /.container -->
+
+    
+    
+
+</body>
+
+</html>

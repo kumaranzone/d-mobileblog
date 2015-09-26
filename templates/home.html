@@ -1,0 +1,46 @@
+ {% extends "base.html" %}
+
+{% load django_markdown %}
+{% block blog_entries %}
+
+              <h2 class="page-header">
+                           Mobile News Zone
+                  <p><small>{{timeval}}</small></p>
+              </h2>       
+              <!-- place holder image - http://placehold.it/900x300 -->
+              <img class="img-responsive" src="{{STATIC_URL}}assets/img/mobile-background.jpg" alt="mobile background image">
+                  <hr>
+
+                <p>About this tech blog: Geeks at large is a side project of this team members. It’s something we do in our spare time driven by our love for gadgets. The blog is meant to be personal and as such it will express personal opinions about the topics discussed.
+
+                Whether it is digital cameras and DSLRs, computers, laptops, computer hardware, robots or just plain sci-fi movies, you name it, we’ve probably got somebody keeping a close eye on it. Not because we’re paid to do it, but instead because we’re driven by natural curiosity in all things high-tech (not that we would object to any sort of payment)..
+                </p>
+                <hr>
+                <h3> Recent Posts  </h3>
+{% for object in object_list|slice:":3"  %}
+  <hr>
+    <li class="media">
+      <div class="media-body">
+          <div class="media">
+              <a href="#" class="pull-left">
+                  <img src="{{ MEDIA_URL }}{{ object.thumbnail }}" >
+              </a>
+              <h3><a href="{% url "entry_detail" slug=object.slug %}">{{ object.title }}</a></h3>
+              <div class="media-body">           
+                {{ object.body|markdown|slice:":255" }}
+                  <br>                                                  
+                 <a class="btn btn-primary" href="{% url "entry_detail" slug=object.slug %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                 <p class="meta">
+                {{ object.created }} |
+                Tagged under {{  object.tags.all|join:", " }}
+                </p>          
+              </div>
+          </div>
+
+        </div>
+      </li>
+   
+{% endfor %}
+  
+{% endblock %}
+    
